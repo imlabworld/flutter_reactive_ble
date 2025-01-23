@@ -3,16 +3,16 @@ packages:
   - packages/*
   - example
 scripts:
-  analyze: melos exec -- flutter analyze
+  analyze: melos exec -- fvm flutter analyze
 
-  format: melos exec -- flutter format .
+  format: melos exec -- fvm flutter format .
 
-  get: melos exec -- flutter pub get
+  get: melos exec -- fvm flutter pub get
 
-  upgrade: melos exec -- flutter packages upgrade
+  upgrade: melos exec -- fvm flutter packages upgrade
 
-  unittest: 
-    run: melos exec -- flutter test
+  unittest:
+    run: melos exec -- fvm flutter test
 
   generate:
     run: melos run generate:dart && melos run generate:flutter
@@ -23,5 +23,5 @@ scripts:
     description: Build all generated files for Dart packages in this project.
 
   generate:flutter:
-    run: melos exec -c 1 --depends-on="build_runner" --flutter -- "flutter pub run build_runner build --delete-conflicting-outputs"
+    run: melos exec -c 1 --depends-on="build_runner" --flutter -- "fvm flutter pub run build_runner build --delete-conflicting-outputs"
     description: Build all generated files for Flutter packages in this project.

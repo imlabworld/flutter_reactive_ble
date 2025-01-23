@@ -30,39 +30,33 @@ class _DeviceDetail extends StatelessWidget {
   final DiscoveredDevice device;
   final void Function(String deviceId) disconnect;
   @override
-  Widget build(BuildContext context) => PopScope(
-        canPop: true,
-        onPopInvoked: (_) async {
-          disconnect(device.id);
-        },
-        child: DefaultTabController(
-          length: 2,
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(device.name.isNotEmpty ? device.name : "Unnamed"),
-              bottom: const TabBar(
-                tabs: [
-                  Tab(
-                    icon: Icon(
-                      Icons.bluetooth_connected,
-                    ),
+  Widget build(BuildContext context) => DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(device.name.isNotEmpty ? device.name : "Unnamed"),
+            bottom: const TabBar(
+              tabs: [
+                Tab(
+                  icon: Icon(
+                    Icons.bluetooth_connected,
                   ),
-                  Tab(
-                    icon: Icon(
-                      Icons.find_in_page_sharp,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            body: TabBarView(
-              children: [
-                DeviceInteractionTab(
-                  device: device,
                 ),
-                const DeviceLogTab(),
+                Tab(
+                  icon: Icon(
+                    Icons.find_in_page_sharp,
+                  ),
+                ),
               ],
             ),
+          ),
+          body: TabBarView(
+            children: [
+              DeviceInteractionTab(
+                device: device,
+              ),
+              const DeviceLogTab(),
+            ],
           ),
         ),
       );
