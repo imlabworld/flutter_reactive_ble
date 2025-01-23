@@ -6,6 +6,7 @@ import var CoreBluetooth.CBAdvertisementDataServiceUUIDsKey
 import var CoreBluetooth.CBAdvertisementDataManufacturerDataKey
 import var CoreBluetooth.CBAdvertisementDataIsConnectable
 import var CoreBluetooth.CBAdvertisementDataLocalNameKey
+import var CoreBluetooth.CBAdvertisementDataSolicitedServiceUUIDsKey
 
 final class PluginController {
 
@@ -42,6 +43,7 @@ final class PluginController {
 
                 let serviceData = advertisementData[CBAdvertisementDataServiceDataKey] as? ServiceData ?? [:]
                 let serviceUuids = advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
+                let solicitedServiceUuids = advertisementData[CBAdvertisementDataSolicitedServiceUUIDsKey] as? [CBUUID] ?? []
                 let isConnectable = (advertisementData[CBAdvertisementDataIsConnectable] as? NSNumber)?.boolValue
                 let manufacturerData = advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data ?? Data()
                 let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String ?? peripheral.name ?? String()
@@ -65,6 +67,7 @@ final class PluginController {
                         }
                     $0.serviceUuids = serviceUuids.map { entry in Uuid.with { $0.data = entry.data }}
                     $0.manufacturerData = manufacturerData
+                    $0.solicitedServiceUuids = solicitedServiceUuids.map { entry in Uuid.with { $0.data = entry.data }}
                 }
 
                 sink.add(.success(deviceDiscoveryMessage))

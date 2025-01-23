@@ -95,6 +95,7 @@ class DeviceScanInfo extends $pb.GeneratedMessage {
     $core.List<$core.int>? manufacturerData,
     $core.Iterable<Uuid>? serviceUuids,
     IsConnectable? isConnectable,
+    $core.Iterable<Uuid>? solicitedServiceUuids,
   }) {
     final $result = create();
     if (id != null) {
@@ -121,6 +122,9 @@ class DeviceScanInfo extends $pb.GeneratedMessage {
     if (isConnectable != null) {
       $result.isConnectable = isConnectable;
     }
+    if (solicitedServiceUuids != null) {
+      $result.solicitedServiceUuids.addAll(solicitedServiceUuids);
+    }
     return $result;
   }
   DeviceScanInfo._() : super();
@@ -136,6 +140,7 @@ class DeviceScanInfo extends $pb.GeneratedMessage {
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'manufacturerData', $pb.PbFieldType.OY, protoName: 'manufacturerData')
     ..pc<Uuid>(7, _omitFieldNames ? '' : 'serviceUuids', $pb.PbFieldType.PM, protoName: 'serviceUuids', subBuilder: Uuid.create)
     ..aOM<IsConnectable>(8, _omitFieldNames ? '' : 'isConnectable', protoName: 'isConnectable', subBuilder: IsConnectable.create)
+    ..pc<Uuid>(9, _omitFieldNames ? '' : 'solicitedServiceUuids', $pb.PbFieldType.PM, protoName: 'solicitedServiceUuids', subBuilder: Uuid.create)
     ..hasRequiredFields = false
   ;
 
@@ -223,6 +228,9 @@ class DeviceScanInfo extends $pb.GeneratedMessage {
   void clearIsConnectable() => clearField(8);
   @$pb.TagNumber(8)
   IsConnectable ensureIsConnectable() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  $core.List<Uuid> get solicitedServiceUuids => $_getList(8);
 }
 
 class ConnectToDeviceRequest extends $pb.GeneratedMessage {

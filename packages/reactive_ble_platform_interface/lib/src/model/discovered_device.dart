@@ -36,6 +36,10 @@ class DiscoveredDevice extends $DiscoveredDevice {
   @CustomEquality(DeepCollectionEquality())
   final List<Uuid> serviceUuids;
 
+  /// Solicited services
+  @CustomEquality(DeepCollectionEquality())
+  final List<Uuid> solicitedServiceUUIDs;
+
   /// Manufacturer specific data. The first 2 bytes are the Company Identifier Codes.
   @CustomEquality(DeepCollectionEquality())
   final Uint8List manufacturerData;
@@ -51,6 +55,7 @@ class DiscoveredDevice extends $DiscoveredDevice {
     required this.manufacturerData,
     required this.rssi,
     required this.serviceUuids,
+    required this.solicitedServiceUUIDs,
     this.connectable = Connectable.unknown,
   });
 }

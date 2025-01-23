@@ -69,6 +69,7 @@ abstract class $DiscoveredDevice {
   String get name;
   Map<Uuid, Uint8List> get serviceData;
   List<Uuid> get serviceUuids;
+  List<Uuid> get solicitedServiceUUIDs;
   Uint8List get manufacturerData;
   int get rssi;
   Connectable get connectable;
@@ -78,6 +79,7 @@ abstract class $DiscoveredDevice {
     String? name,
     Map<Uuid, Uint8List>? serviceData,
     List<Uuid>? serviceUuids,
+    List<Uuid>? solicitedServiceUUIDs,
     Uint8List? manufacturerData,
     int? rssi,
     Connectable? connectable,
@@ -87,6 +89,8 @@ abstract class $DiscoveredDevice {
         name: name ?? this.name,
         serviceData: serviceData ?? this.serviceData,
         serviceUuids: serviceUuids ?? this.serviceUuids,
+        solicitedServiceUUIDs:
+            solicitedServiceUUIDs ?? this.solicitedServiceUUIDs,
         manufacturerData: manufacturerData ?? this.manufacturerData,
         rssi: rssi ?? this.rssi,
         connectable: connectable ?? this.connectable,
@@ -99,6 +103,7 @@ abstract class $DiscoveredDevice {
       this.name,
       this.serviceData,
       this.serviceUuids,
+      this.solicitedServiceUUIDs,
       this.manufacturerData,
       this.rssi,
       this.connectable,
@@ -109,6 +114,7 @@ abstract class $DiscoveredDevice {
       name: change.name,
       serviceData: change.serviceData,
       serviceUuids: change.serviceUuids,
+      solicitedServiceUUIDs: change.solicitedServiceUUIDs,
       manufacturerData: change.manufacturerData,
       rssi: change.rssi,
       connectable: change.connectable,
@@ -117,7 +123,7 @@ abstract class $DiscoveredDevice {
 
   @override
   String toString() =>
-      "DiscoveredDevice(id: $id, name: $name, serviceData: $serviceData, serviceUuids: $serviceUuids, manufacturerData: $manufacturerData, rssi: $rssi, connectable: $connectable)";
+      "DiscoveredDevice(id: $id, name: $name, serviceData: $serviceData, serviceUuids: $serviceUuids, solicitedServiceUUIDs: $solicitedServiceUUIDs, manufacturerData: $manufacturerData, rssi: $rssi, connectable: $connectable)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -128,6 +134,8 @@ abstract class $DiscoveredDevice {
       name == other.name &&
       const DeepCollectionEquality().equals(serviceData, other.serviceData) &&
       const DeepCollectionEquality().equals(serviceUuids, other.serviceUuids) &&
+      const DeepCollectionEquality()
+          .equals(solicitedServiceUUIDs, other.solicitedServiceUUIDs) &&
       const DeepCollectionEquality()
           .equals(manufacturerData, other.manufacturerData) &&
       rssi == other.rssi &&
@@ -141,6 +149,8 @@ abstract class $DiscoveredDevice {
     result = 37 * result + name.hashCode;
     result = 37 * result + const DeepCollectionEquality().hash(serviceData);
     result = 37 * result + const DeepCollectionEquality().hash(serviceUuids);
+    result = 37 * result +
+        const DeepCollectionEquality().hash(solicitedServiceUUIDs);
     result =
         37 * result + const DeepCollectionEquality().hash(manufacturerData);
     result = 37 * result + rssi.hashCode;
@@ -155,6 +165,7 @@ class DiscoveredDevice$Change {
     this.name,
     this.serviceData,
     this.serviceUuids,
+    this.solicitedServiceUUIDs,
     this.manufacturerData,
     this.rssi,
     this.connectable,
@@ -164,6 +175,7 @@ class DiscoveredDevice$Change {
   String name;
   Map<Uuid, Uint8List> serviceData;
   List<Uuid> serviceUuids;
+  List<Uuid> solicitedServiceUUIDs;
   Uint8List manufacturerData;
   int rssi;
   Connectable connectable;
@@ -191,6 +203,14 @@ class DiscoveredDevice$ {
     (serviceUuidsContainer) => serviceUuidsContainer.serviceUuids,
     (serviceUuidsContainer, serviceUuids) =>
         serviceUuidsContainer.copyWith(serviceUuids: serviceUuids),
+  );
+
+  static final solicitedServiceUUIDs = Lens<DiscoveredDevice, List<Uuid>>(
+    (solicitedServiceUUIDsContainer) =>
+        solicitedServiceUUIDsContainer.solicitedServiceUUIDs,
+    (solicitedServiceUUIDsContainer, solicitedServiceUUIDs) =>
+        solicitedServiceUUIDsContainer.copyWith(
+            solicitedServiceUUIDs: solicitedServiceUUIDs),
   );
 
   static final manufacturerData = Lens<DiscoveredDevice, Uint8List>(

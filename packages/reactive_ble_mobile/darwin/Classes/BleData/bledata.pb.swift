@@ -60,6 +60,8 @@ struct DeviceScanInfo {
 
   var serviceUuids: [Uuid] = []
 
+  var solicitedServiceUuids: [Uuid] = []
+
   var rssi: Int32 = 0
 
   var isConnectable: IsConnectable {
@@ -758,6 +760,7 @@ extension DeviceScanInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     7: .same(proto: "serviceUuids"),
     5: .same(proto: "rssi"),
     8: .same(proto: "isConnectable"),
+    9: .same(proto: "solicitedServiceUuids"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -774,6 +777,7 @@ extension DeviceScanInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       case 6: try { try decoder.decodeSingularBytesField(value: &self.manufacturerData) }()
       case 7: try { try decoder.decodeRepeatedMessageField(value: &self.serviceUuids) }()
       case 8: try { try decoder.decodeSingularMessageField(value: &self._isConnectable) }()
+      case 9: try { try decoder.decodeRepeatedMessageField(value: &self.solicitedServiceUuids) }()
       default: break
       }
     }
@@ -808,6 +812,9 @@ extension DeviceScanInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     try { if let v = self._isConnectable {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
     } }()
+    if !self.solicitedServiceUuids.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.solicitedServiceUuids, fieldNumber: 9)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -818,6 +825,7 @@ extension DeviceScanInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if lhs.serviceData != rhs.serviceData {return false}
     if lhs.manufacturerData != rhs.manufacturerData {return false}
     if lhs.serviceUuids != rhs.serviceUuids {return false}
+    if lhs.solicitedServiceUuids != rhs.solicitedServiceUuids {return false}
     if lhs.rssi != rhs.rssi {return false}
     if lhs._isConnectable != rhs._isConnectable {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

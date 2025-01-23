@@ -43,6 +43,7 @@ class ProtobufMessageConverter {
             .addAllServiceData(createServiceDataEntry(scanInfo.serviceData))
             .addAllServiceUuids(createServiceUuids(scanInfo.serviceUuids))
             .setManufacturerData(ByteString.copyFrom(scanInfo.manufacturerData))
+            .addAllSolicitedServiceUuids(createSolicitedServiceUuids(scanInfo.solicitedServiceUuids))
             .build()
 
     fun convertScanErrorInfo(errorMessage: String?): pb.DeviceScanInfo =
@@ -262,6 +263,10 @@ class ProtobufMessageConverter {
 
     private fun createServiceUuids(serviceUuids: List<UUID>): List<pb.Uuid> {
         return serviceUuids.map { createUuidFromParcelUuid(it) }
+    }
+
+    private fun createSolicitedServiceUuids(solicitedServiceUuids: List<UUID>): List<pb.Uuid> {
+        return solicitedServiceUuids.map { createUuidFromParcelUuid(it) }
     }
 
     private fun createUuidFromParcelUuid(uuid: UUID): pb.Uuid {

@@ -11,6 +11,7 @@ data class ScanInfo(
     val serviceData: Map<UUID, ByteArray>,
     val serviceUuids: List<UUID>,
     val manufacturerData: ByteArray,
+    val solicitedServiceUuids: List<UUID>,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -25,7 +26,7 @@ data class ScanInfo(
         if (serviceData != other.serviceData) return false
         if (serviceUuids != other.serviceUuids) return false
         if (!manufacturerData.contentEquals(other.manufacturerData)) return false
-
+        if (solicitedServiceUuids != other.solicitedServiceUuids) return false
         return true
     }
 
@@ -37,6 +38,7 @@ data class ScanInfo(
         result = 31 * result + serviceData.hashCode()
         result = 31 * result + serviceUuids.hashCode()
         result = 31 * result + manufacturerData.contentHashCode()
+        result = 31 * result + solicitedServiceUuids.hashCode()
         return result
     }
 }

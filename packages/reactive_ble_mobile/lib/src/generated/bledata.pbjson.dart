@@ -42,6 +42,7 @@ const DeviceScanInfo$json = {
     {'1': 'serviceUuids', '3': 7, '4': 3, '5': 11, '6': '.Uuid', '10': 'serviceUuids'},
     {'1': 'rssi', '3': 5, '4': 1, '5': 5, '10': 'rssi'},
     {'1': 'isConnectable', '3': 8, '4': 1, '5': 11, '6': '.IsConnectable', '10': 'isConnectable'},
+    {'1': 'solicitedServiceUuids', '3': 9, '4': 3, '5': 11, '6': '.Uuid', '10': 'solicitedServiceUuids'},
   ],
 };
 
@@ -52,7 +53,8 @@ final $typed_data.Uint8List deviceScanInfoDescriptor = $convert.base64Decode(
     'BCADKAsyES5TZXJ2aWNlRGF0YUVudHJ5UgtzZXJ2aWNlRGF0YRIqChBtYW51ZmFjdHVyZXJEYX'
     'RhGAYgASgMUhBtYW51ZmFjdHVyZXJEYXRhEikKDHNlcnZpY2VVdWlkcxgHIAMoCzIFLlV1aWRS'
     'DHNlcnZpY2VVdWlkcxISCgRyc3NpGAUgASgFUgRyc3NpEjQKDWlzQ29ubmVjdGFibGUYCCABKA'
-    'syDi5Jc0Nvbm5lY3RhYmxlUg1pc0Nvbm5lY3RhYmxl');
+    'syDi5Jc0Nvbm5lY3RhYmxlUg1pc0Nvbm5lY3RhYmxlEjsKFXNvbGljaXRlZFNlcnZpY2VVdWlk'
+    'cxgJIAMoCzIFLlV1aWRSFXNvbGljaXRlZFNlcnZpY2VVdWlkcw==');
 
 @$core.Deprecated('Use connectToDeviceRequestDescriptor instead')
 const ConnectToDeviceRequest$json = {

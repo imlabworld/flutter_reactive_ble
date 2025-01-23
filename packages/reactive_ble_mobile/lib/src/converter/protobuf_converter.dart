@@ -55,6 +55,10 @@ class ProtobufConverterImpl implements ProtobufConverter {
         .map((entry) => Uuid(entry.data))
         .toList(growable: false);
 
+    final solicitedServiceUUIDs = message.solicitedServiceUuids
+        .map((entry) => Uuid(entry.data))
+        .toList(growable: false);
+
     return ScanResult(
       result: resultFrom(
         getValue: () => DiscoveredDevice(
@@ -65,6 +69,7 @@ class ProtobufConverterImpl implements ProtobufConverter {
           manufacturerData: Uint8List.fromList(message.manufacturerData),
           rssi: message.rssi,
           connectable: _connectableFrom(message.isConnectable),
+          solicitedServiceUUIDs: solicitedServiceUUIDs,
         ),
         failure: genericFailureFrom(
             hasFailure: message.hasFailure(),
